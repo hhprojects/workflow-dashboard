@@ -1,0 +1,26 @@
+services:
+  # --- Backend Service ---
+  backend:
+    build: ./backend
+    container_name: fastapi-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=sqlite:///./sql_app.db
+    restart: always 
+
+    # --- Frontend Service ---
+    frontend:
+      build: ./frontend
+      container_name: react-frontend
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./frontend:/app
+        - /app/node_modules
+      environment:
+      - CHOKIDAR_USEPOLLING=true
+      depends_on:
+      - backend 
