@@ -1,28 +1,33 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider } from './features/auth/AuthProvider'
-import { ProtectedRoute } from './features/auth/ProtectedRoute'
-import { LoginPage } from './features/auth/LoginPage'
-import { SignupPage } from './features/auth/SignupPage'
+import { AuthProvider, LoginPage, ProtectedRoute, SignupPage } from './features/auth'
+import { ThemeProvider } from './shared/theme/ThemeContext'
+import { AppLayout } from './shared/layout/AppLayout'
 import { KanbanBoard } from './features/kanban/KanbanBoard'
+import { CalendarView } from './features/calendar/CalendarView'
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <KanbanBoard />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="/board" element={<KanbanBoard />} />
+              <Route path="/calendar" element={<CalendarView />} />
+              <Route path="/" element={<Navigate to="/board" replace />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 

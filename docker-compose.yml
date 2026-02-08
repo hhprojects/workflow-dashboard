@@ -1,26 +1,25 @@
 services:
-  # --- Backend Service ---
-  backend:
-    build: ./backend
-    container_name: fastapi-backend
+  frontend-dev:
+    build:
+      context: ./frontend
+      target: development
+    container_name: workflow-frontend-dev
     ports:
-      - "8000:8000"
+      - "5173:5173"
     volumes:
-      - ./backend:/app
+      - ./frontend:/app
+      - /app/node_modules
     environment:
-      - DATABASE_URL=sqlite:///./sql_app.db
-    restart: always 
-
-    # --- Frontend Service ---
-    frontend:
-      build: ./frontend
-      container_name: react-frontend
-      ports:
-        - "3000:3000"
-      volumes:
-        - ./frontend:/app
-        - /app/node_modules
-      environment:
       - CHOKIDAR_USEPOLLING=true
-      depends_on:
-      - backend 
+    profiles:
+      - dev
+
+  frontend-prod:
+    build:
+      context: ./frontend
+      target: production
+    container_name: workflow-frontend-prod
+    ports:
+      - "80:80"
+    profiles:
+      - prod

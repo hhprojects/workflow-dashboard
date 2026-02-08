@@ -1,1 +1,138 @@
 @import "tailwindcss";
+
+/* Enable dark mode variant based on .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ============================================
+     LIGHT THEME - "Sakura Soft" Pastel
+     Cute, modern pastel for young women / students
+     ============================================ */
+  --color-pastel-bg: #FFF5F7;
+  --color-pastel-bg-alt: #FDF2F8;
+  --color-pastel-column: #FFFFFF;
+  --color-pastel-card: #FFFFFF;
+  --color-pastel-accent: #F472B6;
+  --color-pastel-accent-hover: #EC4899;
+  --color-pastel-accent-light: #FBD5E5;
+  --color-pastel-accent-secondary: #A78BFA;
+
+  --color-pastel-border: #FECDD3;
+  --color-pastel-text-primary: #4A3548;
+  --color-pastel-text-secondary: #7C6B7A;
+  --color-pastel-text-muted: #B4A5B2;
+
+  --color-pastel-sidebar: #FFFFFF;
+  --color-pastel-sidebar-hover: #FDF2F8;
+  --color-pastel-sidebar-active: #FCE7F3;
+
+  /* ============================================
+     DARK THEME - "Midnight Slate" Professional
+     Clean, premium dark for working adults
+     ============================================ */
+  --color-dark-bg: #0F172A;
+  --color-dark-bg-alt: #0B1120;
+  --color-dark-column: #1E293B;
+  --color-dark-card: #1E293B;
+  --color-dark-card-hover: #253349;
+  --color-dark-accent: #38BDF8;
+  --color-dark-accent-hover: #0EA5E9;
+  --color-dark-accent-secondary: #818CF8;
+
+  --color-dark-accent-400: #38BDF8;
+  --color-dark-accent-500: #0EA5E9;
+  --color-dark-accent-600: #0284C7;
+
+  --color-dark-border: #1E293B;
+  --color-dark-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-dark-text-primary: #F1F5F9;
+  --color-dark-text-secondary: #94A3B8;
+  --color-dark-text-muted: #64748B;
+
+  --color-dark-sidebar: #0B1120;
+  --color-dark-sidebar-hover: rgba(255, 255, 255, 0.04);
+  --color-dark-sidebar-active: rgba(56, 189, 248, 0.1);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+
+/* Light theme: Nunito (friendly, rounded) */
+html {
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+/* Dark theme: Inter (professional, clean) */
+html.dark {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Custom scrollbar for dark theme */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Custom scrollbar for light theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E8D5E0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4B8C8;
+}
+
+/* Light theme pastel shadow utility */
+.shadow-pastel {
+  box-shadow: 0 4px 20px rgba(244, 114, 182, 0.08), 0 1px 4px rgba(244, 114, 182, 0.04);
+}
+
+.shadow-pastel-lg {
+  box-shadow: 0 8px 32px rgba(244, 114, 182, 0.10), 0 2px 8px rgba(244, 114, 182, 0.06);
+}
+
+/* Dark theme subtle shadow */
+.dark .shadow-dark {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal animation */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
